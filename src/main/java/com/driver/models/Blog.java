@@ -3,7 +3,9 @@ package com.driver.models;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "blog")
@@ -11,7 +13,7 @@ import java.util.Date;
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer blogId;
+    private Integer id;
 
     private String title;
 
@@ -19,6 +21,9 @@ public class Blog {
 
     @CreatedDate
     private Date pubDate;
+
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+    List<Image> imageList = new ArrayList<>();
 
     @JoinColumn
     @ManyToOne
@@ -31,12 +36,12 @@ public class Blog {
         this.content = content;
     }
 
-    public Integer getBlogId() {
-        return blogId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBlogId(Integer blogId) {
-        this.blogId = blogId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -69,5 +74,13 @@ public class Blog {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }
