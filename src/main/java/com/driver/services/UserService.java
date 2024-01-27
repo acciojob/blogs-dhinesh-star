@@ -24,8 +24,11 @@ public class UserService {
         userRepository3.deleteById(userId);
     }
 
-    public User updateUser(Integer id, String password){
+    public User updateUser(Integer id, String password) throws Exception{
         Optional<User> userList = userRepository3.findById(id);
+        if(userList.isEmpty()){
+            throw new Exception("User with given id not found");
+        }
         User user = userList.get();
         user.setPassword(password);
         User newUserUpdated = userRepository3.save(user);

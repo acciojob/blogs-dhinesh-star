@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogService {
@@ -21,9 +22,13 @@ public class BlogService {
     @Autowired
     UserRepository userRepository1;
 
-    public Blog createAndReturnBlog(Integer userId, String title, String content) {
+    public Blog createAndReturnBlog(Integer userId, String title, String content) throws Exception{
         //create a blog at the current time
-        User user = userRepository1.findById(userId).get();
+        Optional<User> userList = userRepository1.findById(userId);
+        if(userList==null){
+            throw new Exception("User will given Id not found");
+        }
+        User user = userList.get();
         Blog blog = new Blog(title,content);
         blog.setUser(user);
         user.getBlogList().add(blog);

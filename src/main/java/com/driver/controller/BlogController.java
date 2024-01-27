@@ -20,8 +20,12 @@ public class BlogController {
                                      @RequestParam String title,
                                      @RequestParam String content) {
         // Create a blog and add it under given user
-        blogService.createAndReturnBlog(userId,title,content);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        try{
+            blogService.createAndReturnBlog(userId,title,content);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{blogId}")

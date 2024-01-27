@@ -31,7 +31,11 @@ public class UserController {
     @PutMapping("/update")
     public ResponseEntity<Void> updateUser(@RequestParam Integer id, @RequestParam String password) {
         // update password of given user
-        User user = userService.updateUser(id,password);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            User user = userService.updateUser(id, password);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

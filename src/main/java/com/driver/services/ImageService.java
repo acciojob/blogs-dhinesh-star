@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ImageService {
@@ -15,8 +16,12 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository2;
 
-    public Image addImage(Integer blogId, String description, String dimensions){
+    public Image addImage(Integer blogId, String description, String dimensions) throws Exception{
         //add an image to the blog
+        Optional<Blog> optionalBlog = blogRepository2.findById(blogId);
+        if(optionalBlog.isEmpty()){
+            throw new Exception("Blog with given id not found");
+        }
         Blog blog = blogRepository2.findById(blogId).get();
         Image image = new Image(description,dimensions);
 
@@ -35,10 +40,10 @@ public class ImageService {
         Image image = imageRepository2.findById(id).get();
         String imageDimension = image.getDimensions();
 
-        String[] dimension = imageDimension.split(",");
+        String[] dimension = imageDimension.split("X");
         int dimensionSize = Integer.parseInt(dimension[0]) * Integer.parseInt(dimension[1]);
 
-        dimension = screenDimensions.split(",");
+        dimension = screenDimensions.split("X");
         int screenDimension = Integer.parseInt(dimension[0]) * Integer.parseInt(dimension[1]);
 
         return screenDimension/dimensionSize;
