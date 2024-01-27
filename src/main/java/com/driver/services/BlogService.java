@@ -22,12 +22,12 @@ public class BlogService {
     @Autowired
     UserRepository userRepository1;
 
-    public Blog createAndReturnBlog(Integer userId, String title, String content) throws Exception{
+    public Blog createAndReturnBlog(Integer userId, String title, String content){
         //create a blog at the current time
         Optional<User> userList = userRepository1.findById(userId);
-        if(userList==null){
-            throw new Exception("User will given Id not found");
-        }
+//        if(userList==null){
+//            throw new Exception("User will given Id not found");
+//        }
         User user = userList.get();
         Blog blog = new Blog(title,content);
         blog.setUser(user);

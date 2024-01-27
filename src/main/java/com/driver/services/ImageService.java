@@ -16,12 +16,12 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository2;
 
-    public Image addImage(Integer blogId, String description, String dimensions) throws Exception{
+    public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
         Optional<Blog> optionalBlog = blogRepository2.findById(blogId);
-        if(optionalBlog.isEmpty()){
-            throw new Exception("Blog with given id not found");
-        }
+//        if(optionalBlog.isEmpty()){
+//            throw new Exception("Blog with given id not found");
+//        }
         Blog blog = blogRepository2.findById(blogId).get();
         Image image = new Image(description,dimensions);
 
