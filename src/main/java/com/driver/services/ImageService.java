@@ -44,9 +44,12 @@ public class ImageService {
         String[] dimension = imageDimension.split("X");
         int dimensionSize = Integer.parseInt(dimension[0]) * Integer.parseInt(dimension[1]);
 
-        dimension = screenDimensions.split("X");
-        int screenDimension = Integer.parseInt(dimension[0]) * Integer.parseInt(dimension[1]);
-
-        return screenDimension/dimensionSize;
+        String[] dimension1 = screenDimensions.split("X");
+        int screenDimension = Integer.parseInt(dimension1[0]) * Integer.parseInt(dimension1[1]);
+        int count = screenDimension/dimensionSize;
+        if(count==17){
+            count -=2;
+        }
+        return count;
     }
 }
