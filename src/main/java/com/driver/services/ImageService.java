@@ -27,8 +27,9 @@ public class ImageService {
 
         blog.getImageList().add(image);
         image.setBlog(blog);
-        Image newImage = imageRepository2.save(image);
-        return newImage;
+        blogRepository2.save(blog);
+//        Image newImage = imageRepository2.save(image);
+        return image;
     }
 
     public void deleteImage(Integer id){
