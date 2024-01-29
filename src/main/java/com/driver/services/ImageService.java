@@ -48,7 +48,7 @@ public class ImageService {
         int screenDimension = Integer.parseInt(dimension1[0]) * Integer.parseInt(dimension1[1]);
         int count = screenDimension/dimensionSize;
         if(count==17){
-            count -=2;
+            count -= 2;
         }
         return count;
     }
